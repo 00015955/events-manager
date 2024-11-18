@@ -1,10 +1,8 @@
 //Student ID: 00015955
-using backend.Data;
 using backend.Dtos.Event;
 using backend.Interfaces;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers;
 
@@ -12,11 +10,9 @@ namespace backend.Controllers;
 [ApiController]
 public class EventController : ControllerBase
 {
-  private readonly ApplicationDBContext _context;
   private readonly IEventRepository _eventRepo;
-  public EventController(ApplicationDBContext context, IEventRepository eventRepo)
+  public EventController( IEventRepository eventRepo)
   {
-    _context = context;
     _eventRepo = eventRepo;
   }
 
@@ -25,7 +21,7 @@ public class EventController : ControllerBase
   {
     var events = await _eventRepo.GetAllAsync();
     var eventDto = events.Select(e => e.ToEventDto());
-    return Ok(events);
+    return Ok(eventDto);
   }
 
   [HttpGet("{id}")]

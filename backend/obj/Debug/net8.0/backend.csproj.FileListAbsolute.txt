@@ -144,3 +144,7 @@
 /Users/imac/Developer/wad/events-manager/backend/obj/Debug/net8.0/ref/backend.dll
 /Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/DotNetEnv.dll
 /Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/Sprache.dll
+/Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/Microsoft.AspNetCore.JsonPatch.dll
+/Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+/Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/Newtonsoft.Json.dll
+/Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/Newtonsoft.Json.Bson.dll

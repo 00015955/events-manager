@@ -24,8 +24,9 @@ public class EventController : ControllerBase
     return Ok(eventDto);
   }
 
-  [HttpGet("{id}")]
-  public async Task<IActionResult> GetEventById(int id)
+  [HttpGet]
+  [Route("{id}")]
+  public async Task<IActionResult> GetEventById([FromRoute] int id)
   {
     var events = await _eventRepo.GetByIdAsync(id);
     if (events == null)

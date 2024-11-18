@@ -15,12 +15,12 @@ public class EventRepository : IEventRepository
   }
   public Task<List<Event>> GetAllAsync()
   {
-    return _context.Events.ToListAsync();
+    return _context.Events.Include(c => c.Comments).ToListAsync();
   }
 
   public async Task<Event?> GetByIdAsync(int id)
   {
-    return await _context.Events.FindAsync(id);
+    return await _context.Events.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
   }
 
   public async Task<Event> CreateAsync(Event eventModel)

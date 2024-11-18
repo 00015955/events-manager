@@ -15,7 +15,8 @@ public static class EventMappers
       Location = eventModel.Location,
       Description = eventModel.Description,
       StartDate = eventModel.StartDate,
-      Image = eventModel.Image
+      Image = eventModel.Image,
+      Comments = eventModel.Comments.Select(c => c.ToCommentDto()).ToList()
     };
   }
 

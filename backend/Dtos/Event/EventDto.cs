@@ -1,4 +1,7 @@
 //Student ID: 00015955
+
+using backend.Dtos.Comment;
+
 namespace backend.Dtos.Event;
 
 public class EventDto
@@ -9,5 +12,5 @@ public class EventDto
   public DateTime StartDate { get; set; } = DateTime.Now;
   public string Image { get; set; } = string.Empty;
   public string Description { get; set; } = string.Empty;
-  //Data Transfer without Comments
+  public List<CommentDto> Comments { get; set; }
 }

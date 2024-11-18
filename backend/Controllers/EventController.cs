@@ -1,5 +1,6 @@
 //Student ID: 00015955
 using backend.Data;
+using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Controllers;
@@ -17,7 +18,7 @@ public class EventController : ControllerBase
   [HttpGet]
   public IActionResult GetAllEvents()
   {
-    var events = _context.Events.ToList();
+    var events = _context.Events.ToList().Select(e => e.ToEventDto());
     return Ok(events);
   }
 
@@ -29,6 +30,6 @@ public class EventController : ControllerBase
     {
       return NotFound();
     }
-    return Ok(events);
+    return Ok(events.ToEventDto());
   }
 }

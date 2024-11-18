@@ -1,9 +1,31 @@
+using DotNetEnv;
+using backend.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+Env.Load();
+
+//Mac or Linux
+var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+  .Replace("{DB_HOST}", Env.GetString("DB_HOST"))
+  .Replace("{DB_NAME}", Env.GetString("DB_NAME"))
+  .Replace("{DB_USER}", Env.GetString("DB_USER"))
+  .Replace("{DB_PASS}", Env.GetString("DB_PASS"));
+
+//Windows
+/*var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+  .Replace("{PCNAME}", Env.GetString("PCNAME"))
+  .Replace("{DATABASENAME}", Env.GetString("DATABASENAME"));*/
 
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddDbContext<ApplicationDBContext>(options =>
+{
+  options.UseSqlServer(defaultConnectionString);
+});
 
 var app = builder.Build();
 

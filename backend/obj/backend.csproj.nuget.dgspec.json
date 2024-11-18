@@ -13,7 +13,6 @@
         "packagesPath": "/Users/imac/.nuget/packages/",
         "outputPath": "/Users/imac/Developer/wad/events-manager/backend/obj/",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/imac/.nuget/NuGet/NuGet.Config"
         ],
@@ -45,6 +44,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "DotNetEnv": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.10, )"

@@ -487,11 +487,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/imac/Developer/wad/events-manager/WAD_00015955/WAD_00015955/WAD_00015955.csproj",
-      "projectName": "WAD_00015955",
-      "projectPath": "/Users/imac/Developer/wad/events-manager/WAD_00015955/WAD_00015955/WAD_00015955.csproj",
+      "projectUniqueName": "/Users/imac/Developer/wad/events-manager/backend/backend.csproj",
+      "projectName": "backend",
+      "projectPath": "/Users/imac/Developer/wad/events-manager/backend/backend.csproj",
       "packagesPath": "/Users/imac/.nuget/packages/",
-      "outputPath": "/Users/imac/Developer/wad/events-manager/WAD_00015955/WAD_00015955/obj/",
+      "outputPath": "/Users/imac/Developer/wad/events-manager/backend/obj/",
       "projectStyle": "PackageReference",
       "UsingMicrosoftNETSdk": false,
       "configFilePaths": [

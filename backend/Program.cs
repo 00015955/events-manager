@@ -1,9 +1,22 @@
 //Student ID: 00015955
 using DotNetEnv;
 using backend.Data;
+using backend.Interfaces;
+using backend.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+// Allow all origins, methods, and headers
+builder.Services.AddCors(options =>
+{
+  options.AddPolicy("AllowAll",
+    policy =>
+    {
+      policy.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
 
 Env.Load();
 
@@ -29,6 +42,8 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
   options.UseSqlServer(defaultConnectionString);
 });
 
+builder.Services.AddScoped<IEventRepository, EventRepository>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,7 +54,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors("AllowAll");
 app.MapControllers();
 
 app.Run();

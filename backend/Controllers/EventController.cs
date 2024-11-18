@@ -3,6 +3,7 @@ using backend.Data;
 using backend.Dtos.Event;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace backend.Controllers;
 
@@ -17,16 +18,17 @@ public class EventController : ControllerBase
   }
 
   [HttpGet]
-  public IActionResult GetAllEvents()
+  public async Task<IActionResult> GetAllEvents()
   {
-    var events = _context.Events.ToList().Select(e => e.ToEventDto());
+    var events = await _context.Events.ToListAsync();
+    var eventDto = events.Select(e => e.ToEventDto());
     return Ok(events);
   }
 
   [HttpGet("{id}")]
-  public IActionResult GetEventById(int id)
+  public async Task<IActionResult> GetEventById(int id)
   {
-    var events = _context.Events.Find(id);
+    var events = await _context.Events.FindAsync(id);
     if (events == null)
     {
       return NotFound();
@@ -35,19 +37,19 @@ public class EventController : ControllerBase
   }
 
   [HttpPost]
-  public IActionResult CreateEvent([FromBody] CreateEventRequestDto eventDto)
+  public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequestDto eventDto)
   {
     var eventModel = eventDto.ToEventFromCreateDTO();
-    _context.Events.Add(eventModel);
-    _context.SaveChanges();
+    await _context.Events.AddAsync(eventModel);
+    await _context.SaveChangesAsync();
     return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto());
   }
 
   [HttpPut]
   [Route("{id}")]
-  public IActionResult UpdateEvent([FromRoute] int id, [FromBody] UpdateEventRequestDto updateDto)
+  public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventRequestDto updateDto)
   {
-    var eventModel = _context.Events.FirstOrDefault(e => e.Id == id);
+    var eventModel = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
     if (eventModel == null)
     {
       return NotFound();
@@ -58,7 +60,21 @@ public class EventController : ControllerBase
     eventModel.Image = updateDto.Image;
     eventModel.Description = updateDto.Description;
 
-    _context.SaveChanges();
+    await _context.SaveChangesAsync();
     return Ok(eventModel.ToEventDto());
+  }
+
+  [HttpDelete]
+  [Route("{id}")]
+  public async Task<IActionResult> DeleteEvent([FromRoute] int id)
+  {
+    var eventModel = await _context.Events.FirstOrDefaultAsync(e => e.Id == id);
+    if (eventModel == null)
+    {
+      return NotFound();
+    }
+    _context.Events.Remove(eventModel);
+    await _context.SaveChangesAsync();
+    return NoContent();
   }
 }

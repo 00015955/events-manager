@@ -1,3 +1,4 @@
+//Student ID: 00015955
 using backend.Dtos.Event;
 using backend.Models;
 
@@ -7,7 +8,7 @@ public static class EventMappers
 {
   public static EventDto ToEventDto(this Event eventModel)
   {
-    return new EventDto()
+    return new EventDto
     {
       Id = eventModel.Id,
       Name = eventModel.Name,
@@ -15,6 +16,18 @@ public static class EventMappers
       Description = eventModel.Description,
       StartDate = eventModel.StartDate,
       Image = eventModel.Image
+    };
+  }
+
+  public static Event ToEventFromCreateDTO(this CreateEventRequestDto eventRequestDto)
+  {
+    return new Event
+    {
+      Name = eventRequestDto.Name,
+      Location = eventRequestDto.Location,
+      Description = eventRequestDto.Description,
+      StartDate = eventRequestDto.StartDate,
+      Image = eventRequestDto.Image
     };
   }
 }

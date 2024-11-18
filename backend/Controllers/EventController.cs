@@ -1,5 +1,6 @@
 //Student ID: 00015955
 using backend.Data;
+using backend.Dtos.Event;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
 
@@ -31,5 +32,14 @@ public class EventController : ControllerBase
       return NotFound();
     }
     return Ok(events.ToEventDto());
+  }
+
+  [HttpPost]
+  public IActionResult CreateEvent([FromBody] CreateEventRequestDto eventDto)
+  {
+    var eventModel = eventDto.ToEventFromCreateDTO();
+    _context.Events.Add(eventModel);
+    _context.SaveChanges();
+    return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto());
   }
 }

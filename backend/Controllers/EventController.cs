@@ -42,4 +42,23 @@ public class EventController : ControllerBase
     _context.SaveChanges();
     return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto());
   }
+
+  [HttpPut]
+  [Route("{id}")]
+  public IActionResult UpdateEvent([FromRoute] int id, [FromBody] UpdateEventRequestDto updateDto)
+  {
+    var eventModel = _context.Events.FirstOrDefault(e => e.Id == id);
+    if (eventModel == null)
+    {
+      return NotFound();
+    }
+    eventModel.Name = updateDto.Name;
+    eventModel.Location = updateDto.Location;
+    eventModel.StartDate = updateDto.StartDate;
+    eventModel.Image = updateDto.Image;
+    eventModel.Description = updateDto.Description;
+
+    _context.SaveChanges();
+    return Ok(eventModel.ToEventDto());
+  }
 }

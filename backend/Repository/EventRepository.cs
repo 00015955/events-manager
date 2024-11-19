@@ -17,10 +17,21 @@ public class EventRepository : IEventRepository
   public async Task<List<Event>> GetAllAsync(QueryObject query)
   {
     var events =  _context.Events.Include(c => c.Comments).AsQueryable();
+    //Filtering by Event Name
     if (!string.IsNullOrWhiteSpace(query.Name))
     {
       events = events.Where(e => e.Name.Contains(query.Name));
     }
+    
+    //Sorting by asc/desc order
+    if (!string.IsNullOrWhiteSpace(query.SortBy))
+    {
+      if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
+      {
+        events = query.IsDescending ? events.OrderByDescending(e => e.Name) : events.OrderBy(e => e.Name);
+      }
+    }
+    
     return await events.ToListAsync();
   }
 

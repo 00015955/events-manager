@@ -27,7 +27,6 @@ public static class EventMappers
       Name = eventRequestDto.Name,
       Location = eventRequestDto.Location,
       Description = eventRequestDto.Description,
-      StartDate = eventRequestDto.StartDate,
       Image = eventRequestDto.Image
     };
   }

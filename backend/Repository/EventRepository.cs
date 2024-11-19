@@ -39,7 +39,6 @@ public class EventRepository : IEventRepository
     }
     eventModel.Name = updateEventDto.Name;
     eventModel.Location = updateEventDto.Location;
-    eventModel.StartDate = updateEventDto.StartDate;
     eventModel.Image = updateEventDto.Image;
     eventModel.Description = updateEventDto.Description;
 

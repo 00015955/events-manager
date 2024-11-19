@@ -19,15 +19,17 @@ public class EventController : ControllerBase
   [HttpGet]
   public async Task<IActionResult> GetAllEvents()
   {
+    if (!ModelState.IsValid) return BadRequest(ModelState); //Data Validation
     var events = await _eventRepo.GetAllAsync();
     var eventDto = events.Select(e => e.ToEventDto());
     return Ok(eventDto);
   }
 
   [HttpGet]
-  [Route("{id}")]
+  [Route("{id:int}")]
   public async Task<IActionResult> GetEventById([FromRoute] int id)
   {
+    if (!ModelState.IsValid) return BadRequest(ModelState);
     var events = await _eventRepo.GetByIdAsync(id);
     if (events == null)
     {
@@ -39,15 +41,17 @@ public class EventController : ControllerBase
   [HttpPost]
   public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequestDto eventDto)
   {
+    if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = eventDto.ToEventFromCreateDTO();
     await _eventRepo.CreateAsync(eventModel);
     return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto());
   }
 
   [HttpPut]
-  [Route("{id}")]
+  [Route("{id:int}")]
   public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventRequestDto updateDto)
   {
+    if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = await _eventRepo.UpdateAsync(id, updateDto);
     if (eventModel == null)
     {
@@ -57,9 +61,10 @@ public class EventController : ControllerBase
   }
 
   [HttpDelete]
-  [Route("{id}")]
+  [Route("{id:int}")]
   public async Task<IActionResult> DeleteEvent([FromRoute] int id)
   {
+    if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = await _eventRepo.DeleteAsync(id);
     if (eventModel == null)
     {

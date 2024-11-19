@@ -32,7 +32,7 @@ public static class CommentMapper
     return new Comment
     {
       Title = commentDto.Title,
-      Content = commentDto.Content,
+      Content = commentDto.Content
     };
   }
 }

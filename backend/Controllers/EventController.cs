@@ -1,5 +1,6 @@
 //Student ID: 00015955
 using backend.Dtos.Event;
+using backend.Helpers;
 using backend.Interfaces;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -17,10 +18,10 @@ public class EventController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<IActionResult> GetAllEvents()
+  public async Task<IActionResult> GetAllEvents([FromQuery] QueryObject query)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState); //Data Validation
-    var events = await _eventRepo.GetAllAsync();
+    var events = await _eventRepo.GetAllAsync(query);
     var eventDto = events.Select(e => e.ToEventDto());
     return Ok(eventDto);
   }

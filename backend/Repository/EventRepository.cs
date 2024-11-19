@@ -1,5 +1,6 @@
 using backend.Data;
 using backend.Dtos.Event;
+using backend.Helpers;
 using backend.Interfaces;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,14 @@ public class EventRepository : IEventRepository
   {
     _context = context;
   }
-  public Task<List<Event>> GetAllAsync()
+  public async Task<List<Event>> GetAllAsync(QueryObject query)
   {
-    return _context.Events.Include(c => c.Comments).ToListAsync();
+    var events =  _context.Events.Include(c => c.Comments).AsQueryable();
+    if (!string.IsNullOrWhiteSpace(query.Name))
+    {
+      events = events.Where(e => e.Name.Contains(query.Name));
+    }
+    return await events.ToListAsync();
   }
 
   public async Task<Event?> GetByIdAsync(int id)

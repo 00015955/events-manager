@@ -10,4 +10,5 @@ public interface IEventRepository
   Task<Event> CreateAsync(Event eventModel);
   Task<Event?> UpdateAsync(int id, UpdateEventRequestDto eventDto);
   Task<Event?> DeleteAsync(int id);
+  Task<bool> EventExists(int id);
 }

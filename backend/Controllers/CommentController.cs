@@ -1,3 +1,4 @@
+using backend.Dtos.Comment;
 using backend.Interfaces;
 using backend.Mappers;
 using Microsoft.AspNetCore.Mvc;
@@ -9,9 +10,11 @@ namespace backend.Controllers;
 public class CommentController : ControllerBase
 {
   private readonly ICommentRepository _commentRepo;
-  public CommentController( ICommentRepository commentRepo)
+  private readonly IEventRepository _eventRepo;
+  public CommentController(ICommentRepository commentRepo, IEventRepository eventRepo)
   {
     _commentRepo = commentRepo;
+    _eventRepo = eventRepo;
   }
   [HttpGet]
   public async Task<IActionResult> GetAllComments()
@@ -31,5 +34,18 @@ public class CommentController : ControllerBase
       return NotFound();
     }
     return Ok(comments.ToCommentDto());
+  }
+
+  [HttpPost]
+  [Route("{eventId}")]
+  public async Task<IActionResult> CreateComment([FromRoute] int eventId, CreateCommentRequestDto commentDto)
+  {
+    if (!await _eventRepo.EventExists(eventId))
+    {
+      return BadRequest("Event does not exist");
+    }
+    var commentModel = commentDto.ToCommentFromCreate(eventId);
+    await _commentRepo.CreateAsync(commentModel);
+    return CreatedAtAction(nameof(GetCommentById), new {id = commentModel.Id}, commentModel.ToCommentDto());
   }
 }

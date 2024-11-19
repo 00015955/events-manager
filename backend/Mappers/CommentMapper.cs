@@ -16,4 +16,14 @@ public static class CommentMapper
       EventId = commentModel.EventId
     };
   }
+  
+  public static Comment ToCommentFromCreate(this CreateCommentRequestDto commentDto, int eventId)
+  {
+    return new Comment
+    {
+      Title = commentDto.Title,
+      Content = commentDto.Content,
+      EventId = eventId
+    };
+  }
 }

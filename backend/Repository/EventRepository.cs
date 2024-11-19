@@ -58,4 +58,9 @@ public class EventRepository : IEventRepository
     await _context.SaveChangesAsync();
     return eventModel;
   }
+
+  public Task<bool> EventExists(int id)
+  {
+    return _context.Events.AnyAsync(e => e.Id == id);
+  }
 }

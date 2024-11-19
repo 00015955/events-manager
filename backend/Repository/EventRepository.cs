@@ -23,7 +23,7 @@ public class EventRepository : IEventRepository
       events = events.Where(e => e.Name.Contains(query.Name));
     }
     
-    //Sorting by asc/desc order
+    //Sorting by Event Name
     if (!string.IsNullOrWhiteSpace(query.SortBy))
     {
       if (query.SortBy.Equals("Name", StringComparison.OrdinalIgnoreCase))
@@ -32,7 +32,10 @@ public class EventRepository : IEventRepository
       }
     }
     
-    return await events.ToListAsync();
+    //Pagination
+    var skipNumber = (query.PageNumber - 1) * query.PageSize;
+    
+    return await events.Skip(skipNumber).Take(query.PageSize).ToListAsync();
   }
 
   public async Task<Event?> GetByIdAsync(int id)

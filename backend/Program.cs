@@ -1,15 +1,9 @@
 //Student ID: 00015955
-
-using System.Text;
 using DotNetEnv;
 using backend.Data;
 using backend.Interfaces;
-using backend.Models;
 using backend.Repository;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 // Allow all origins, methods, and headers
@@ -53,36 +47,6 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
   options.UseSqlServer(defaultConnectionString);
 });
 
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-{
-  options.Password.RequireDigit = true;
-  options.Password.RequireLowercase = true;
-  options.Password.RequireUppercase = true;
-  options.Password.RequireNonAlphanumeric = true;
-  options.Password.RequiredLength = 12;
-}).AddEntityFrameworkStores<ApplicationDBContext>();
-
-builder.Services.AddAuthentication(options =>
-{
-  options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultForbidScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-  options.DefaultSignOutScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(options =>
-{
-  options.TokenValidationParameters = new TokenValidationParameters
-  {
-    ValidateIssuer = true,
-    ValidIssuer = builder.Configuration["Jwt:Issuer"],
-    ValidateAudience = true,
-    ValidAudience = builder.Configuration["Jwt:Audience"],
-    ValidateIssuerSigningKey = true,
-    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SigningKey"]!))
-  };
-});
-
 builder.Services.AddScoped<IEventRepository, EventRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 
@@ -96,8 +60,6 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseAuthentication();
-app.UseAuthorization();
 app.UseCors("AllowAll");
 app.MapControllers();
 

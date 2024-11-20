@@ -8,8 +8,6 @@
 
     <ItemGroup>
         <PackageReference Include="DotNetEnv" Version="3.1.1" />
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.11" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.10" />
         <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.11">
@@ -21,7 +19,6 @@
           <PrivateAssets>all</PrivateAssets>
           <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="8.0.11" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
     </ItemGroup>

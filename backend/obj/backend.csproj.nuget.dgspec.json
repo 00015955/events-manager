@@ -48,14 +48,6 @@
               "target": "Package",
               "version": "[3.1.1, )"
             },
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[8.0.11, )"
-            },
-            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
-              "target": "Package",
-              "version": "[8.0.11, )"
-            },
             "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[8.0.11, )"
@@ -77,10 +69,6 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
-              "target": "Package",
-              "version": "[8.0.11, )"
-            },
-            "Microsoft.Extensions.Identity.Core": {
               "target": "Package",
               "version": "[8.0.11, )"
             },

@@ -1,4 +1,3 @@
-using backend.Dtos.Comment;
 using backend.Models;
 
 namespace backend.Interfaces;

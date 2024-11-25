@@ -17,7 +17,7 @@ export class AppComponent {
   events: IEvent[] = [];
 
   constructor() {
-    this.eventService.getEvents().subscribe(val => {
+    this.eventService.getAllEvents().subscribe(val => {
       this.events = val
     });
   }

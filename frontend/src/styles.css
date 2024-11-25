@@ -1,8 +1,7 @@
-/* You can add global styles to this file, and also import other style files */
+@import "ngx-toastr/toastr"; /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 *, html{
   box-sizing: border-box;
   margin: 0;
@@ -12,4 +11,14 @@
 body{
   background: #000;
   color: #fff;
+}
+
+@layer components {
+  .form-control {
+    @apply bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500;
+  }
+
+  .form-error {
+    @apply text-red-600 text-sm mt-1;
+  }
 }

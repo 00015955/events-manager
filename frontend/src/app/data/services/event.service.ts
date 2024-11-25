@@ -9,7 +9,19 @@ export class EventService {
   http: HttpClient = inject(HttpClient);
   baseApiUrl = 'http://localhost:5182/api';
 
-  getEvents(){
+  getAllEvents(){
     return this.http.get<IEvent[]>(`${this.baseApiUrl}/event`)
+  }
+  getEvent(id: number){
+    return this.http.get<IEvent>(`${this.baseApiUrl}/events/${id}`)
+  }
+  createEvent(event: IEvent){
+    return this.http.post<IEvent>(`${this.baseApiUrl}/event`, event)
+  }
+  updateEvent(id: number, event: IEvent){
+    return this.http.put(`${this.baseApiUrl}/events/${id}`, event)
+  }
+  deleteEvent(id: number){
+    return this.http.delete(`${this.baseApiUrl}/events/${id}`)
   }
 }

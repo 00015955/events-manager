@@ -11,8 +11,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideToastr({
-      timeOut: 5000,
-      positionClass: 'toast-top-center',
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
   ]

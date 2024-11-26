@@ -1,0 +1,28 @@
+<div class="modal-overlay">
+  <div class="modal-content bg-white p-5 rounded-md shadow-md">
+    <h2 class="text-xl font-semibold">Add Event</h2>
+    <form #eventForm="ngForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="block text-gray-700">Event Name</label>
+        <input type="text" name="name" [(ngModel)]="newEvent.name" required class="w-full border p-2 rounded-md">
+      </div>
+      <div class="mb-3">
+        <label class="block text-gray-700">Event Description</label>
+        <textarea name="description" [(ngModel)]="newEvent.description" required class="w-full border p-2 rounded-md"></textarea>
+      </div>
+      <div class="mb-3">
+        <label class="block text-gray-700">Event Image</label>
+        <input type="text" name="image" [(ngModel)]="newEvent.image" required class="w-full border p-2 rounded-md">
+      </div>
+      <div class="mb-3">
+        <label class="block text-gray-700">Event Location</label>
+        <input type="text" name="location" [(ngModel)]="newEvent.location" required class="w-full border p-2 rounded-md">
+      </div>
+      <div class="flex justify-end gap-2">
+        <button type="button" class="bg-gray-300 px-4 py-2 rounded-md" (click)="closeModal()">Cancel</button>
+        <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600">Add Event</button>
+      </div>
+    </form>
+  </div>
+</div>
+

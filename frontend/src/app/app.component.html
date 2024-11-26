@@ -1,6 +1,10 @@
-<main class="mx-auto container items-center flex flex-col px-5 py-5 lg:px-10">
+<main class="mx-auto container flex flex-col px-5 py-5 lg:px-10">
   <h1 class="text-4xl font-bold">Events Manager</h1>
-  <div class="grid grid-cols-3 gap-5 pt-10">
+  <div class="flex flex-col items-start gap-3 pt-5">
+    <button class="p-5 bg-green-500 rounded-2xl hover:bg-green-500/90">Add Event</button>
+    <div class="w-full h-[1px] bg-gray-500"></div>
+  </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 w-full xl:grid-cols-3 gap-5 pt-10">
   @for (event of events; track event.id){
     <app-event-card [event] = "event"></app-event-card>
   }

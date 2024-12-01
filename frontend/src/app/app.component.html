@@ -1,11 +1,16 @@
 <main class="mx-auto container flex flex-col px-5 py-5 lg:px-10">
   <h1 class="text-4xl font-bold">Events Manager</h1>
   <div class="flex flex-col items-start gap-3 pt-5">
-    <button (click)="showAddEventModal = true" class="p-5 bg-green-500 rounded-2xl hover:bg-green-500/90">Add Event</button>
-    <div class="w-full h-[1px] bg-gray-500"></div>
+    <button
+      (click)="showAddEventModal = true"
+      [disabled]="showAddEventModal"
+      class="p-5 bg-green-500 rounded-2xl hover:bg-green-500/90 disabled:bg-green-900 disabled:cursor-not-allowed">
+      Add Event
+    </button>
   </div>
 
   <app-add-event-modal
+    class="pt-5 "
     *ngIf="showAddEventModal"
     (close)="showAddEventModal = false"
     (eventAdded)="addEvent($event)"
@@ -16,6 +21,7 @@
     <app-event-card
       *ngFor="let event of events; trackBy: trackByEventId"
       [event]="event"
+      (eventDeleted)="handleEventDeleted($event)"
     ></app-event-card>
   </div>
 </main>

@@ -1,11 +1,12 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule} from '@angular/forms';
 import { IEvent } from '../../data/interfaces/event.interface';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-add-event-modal',
   standalone: true,
-  imports: [FormsModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './add-event-modal.component.html',
 })
 export class AddEventModalComponent {

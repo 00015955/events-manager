@@ -13,15 +13,15 @@ export class EventService {
     return this.http.get<IEvent[]>(`${this.baseApiUrl}/event`)
   }
   getEvent(id: number){
-    return this.http.get<IEvent>(`${this.baseApiUrl}/events/${id}`)
+    return this.http.get<IEvent>(`${this.baseApiUrl}/event/${id}`)
   }
   createEvent(event: IEvent){
     return this.http.post<IEvent>(`${this.baseApiUrl}/event`, event)
   }
   updateEvent(id: number, event: IEvent){
-    return this.http.put(`${this.baseApiUrl}/events/${id}`, event)
+    return this.http.put(`${this.baseApiUrl}/event/${id}`, event)
   }
   deleteEvent(id: number){
-    return this.http.delete(`${this.baseApiUrl}/events/${id}`)
+    return this.http.delete(`${this.baseApiUrl}/event/${id}`)
   }
 }

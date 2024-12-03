@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import {IEvent} from '../../data/interfaces/event.interface';
 import {IComment} from '../../data/interfaces/comment.interface';
 import {EventService} from '../../data/services/event.service';
+import {ToastService} from '../../data/services/toasts.service';
 
 @Component({
   selector: 'app-event-details',
@@ -25,6 +26,7 @@ export class EventDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private eventService: EventService,
+    private toastService: ToastService
   ) {}
 
   ngOnInit(): void {
@@ -106,11 +108,12 @@ export class EventDetailsComponent implements OnInit {
             if (index !== -1) {
               this.comments[index] = updatedComment;
             }
-            console.log('Comment updated successfully!', 'Success');
+            this.toastService.show('Comment updated successfully!', 'success');
             this.closeCommentModal();
           },
           error: (err) => {
             console.error('Failed to update comment:', err);
+            this.toastService.show('Failed to update comment!', 'error');
           },
         });
     } else {
@@ -119,11 +122,12 @@ export class EventDetailsComponent implements OnInit {
       this.eventService.createComment(this.eventId, this.currentComment).subscribe({
         next: (newComment) => {
           this.comments.push(newComment);
-          console.log('Comment added successfully!', 'Success');
+          this.toastService.show('Comment added successfully!', 'success');
           this.closeCommentModal();
         },
         error: (err) => {
           console.error('Failed to add comment:', err);
+          this.toastService.show('Failed to add comment!', 'error');
         },
       });
     }
@@ -135,10 +139,11 @@ export class EventDetailsComponent implements OnInit {
       this.eventService.deleteComment(commentId).subscribe({
         next: () => {
           this.comments = this.comments.filter((c) => c.id !== commentId);
-          console.log('Comment deleted successfully!', 'Success');
+          this.toastService.show('Comment deleted successfully!', 'success');
         },
         error: (err) => {
           console.error('Failed to delete comment:', err);
+          this.toastService.show('Failed to delete comment!', 'error');
         },
       });
     }

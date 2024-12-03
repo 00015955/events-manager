@@ -4,6 +4,7 @@ import {IEvent} from '../../data/interfaces/event.interface';
 import {AddEventModalComponent} from '../add-event-modal/add-event-modal.component';
 import {EventCardComponent} from '../event-card/event-card.component';
 import {NgForOf, NgIf} from '@angular/common';
+import {ToastService} from '../../data/services/toasts.service';
 
 @Component({
   selector: 'app-event-list',
@@ -21,7 +22,7 @@ export class EventListComponent implements OnInit {
   events: IEvent[] = [];
   showAddEventModal = false;
 
-  constructor() {
+  constructor(private toastService: ToastService) {
     this.eventService.getAllEvents().subscribe({
       next: (val) => {
         this.events = val;
@@ -36,11 +37,12 @@ export class EventListComponent implements OnInit {
     this.eventService.createEvent($event).subscribe({
       next: (createdEvent) => {
         this.events.push(createdEvent);
-        console.log('Event added successfully!', 'Success');
+        this.toastService.show('Event added successfully!', 'success');
         this.showAddEventModal = false;
       },
       error: (error) => {
         console.error('Failed to create event:', error);
+        this.toastService.show('Failed to create event!', 'error');
       }
     });
   }

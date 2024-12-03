@@ -4,6 +4,7 @@ import {EventService} from '../../data/services/event.service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
+import {ToastService} from '../../data/services/toasts.service';
 
 @Component({
   selector: 'app-event-card',
@@ -19,7 +20,7 @@ export class EventCardComponent {
   showModal = false;
   editableEvent!: IEvent;
 
-  constructor(private eventService: EventService) {}
+  constructor(private eventService: EventService, private toastService: ToastService) {}
 
   openDeleteModal() {
     this.showDeleteModal = true;
@@ -48,11 +49,12 @@ export class EventCardComponent {
 
         this.eventUpdated.emit(this.event);
 
-        console.log('Event updated successfully!', 'Success');
+        this.toastService.show('Event updated successfully!', 'success');
         this.closeEditModal();
       },
       error: (err) => {
         console.error('Failed to update event:', err);
+        this.toastService.show('Failed to update event. Please try again.', 'error');
       },
     });
   }
@@ -60,12 +62,13 @@ export class EventCardComponent {
   deleteEvent() {
     this.eventService.deleteEvent(this.event.id).subscribe({
       next: () => {
-        console.log('Event deleted successfully!', 'Success');
+        this.toastService.show('Event deleted successfully!', 'success');
         this.eventDeleted.emit(this.event.id); // Notify the parent about the deletion
         this.closeDeleteModal();
       },
       error: (error) => {
         console.error('Failed to delete event:', error);
+        this.toastService.show('Failed to delete event. Please try again.', 'error');
         this.closeDeleteModal();
       }
     });

@@ -1,5 +1,3 @@
-import {IComment} from './comment.interface';
-
 export interface IEvent {
   id: number;
   name: string;
@@ -7,5 +5,4 @@ export interface IEvent {
   startDate: Date;
   image: string;
   description: string;
-  comments?: IComment[] | null;
 }

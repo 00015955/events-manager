@@ -1,0 +1,103 @@
+<div *ngIf="event; else loading">
+  <div>
+    <button
+      class="mt-4 p-3 bg-gray-500 text-white rounded hover:bg-gray-700"
+      routerLink="/"
+    >
+      Back to Event List
+    </button>
+    <img
+      class="rounded-xl object-cover w-full"
+      [src]="event.image || '/event-img.jpeg'"
+      alt="event-img"
+    />
+    <div class="p-5">
+      <h1 class="font-bold text-3xl mb-2">{{ event.name }}</h1>
+      <h2 class="text-lg text-gray-400 mb-4">{{ event.startDate | date }}</h2>
+      <p class="mb-2"><strong>Location:</strong> {{ event.location }}</p>
+      <p class="mb-4">{{ event.description }}</p>
+
+      <!-- Comments Section -->
+      <div class="comments-section mt-8">
+        <h3 class="text-2xl font-bold mb-4">Comments</h3>
+        <button
+          class="p-3 bg-blue-500 text-white rounded hover:bg-blue-700 mb-4"
+          (click)="openAddCommentModal()"
+        >
+          Add Comment
+        </button>
+        <div *ngIf="comments.length > 0; else noComments">
+          <div *ngFor="let comment of comments" class="mb-4 border-b pb-2">
+            <h4 class="font-semibold">{{ comment.title }}</h4>
+            <p class="text-gray-600">{{ comment.content }}</p>
+            <p class="text-sm text-gray-400">{{ comment.createdOn | date: 'short' }}</p>
+            <div class="flex gap-2 mt-2">
+              <button
+                class="p-2 bg-green-500 text-white rounded hover:bg-green-700"
+                (click)="openEditCommentModal(comment)"
+              >
+                Edit
+              </button>
+              <button
+                class="p-2 bg-red-500 text-white rounded hover:bg-red-700"
+                (click)="deleteComment(comment.id)"
+              >
+                Delete
+              </button>
+            </div>
+          </div>
+        </div>
+        <ng-template #noComments>
+          <p>No comments available.</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+
+  <!-- Comment Modal -->
+  <div
+    *ngIf="showCommentModal"
+    class="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+  >
+    <div class="bg-white p-6 rounded-lg shadow-lg w-1/2">
+      <h2 class="text-xl font-bold mb-4">
+        {{ isEditing ? 'Edit Comment' : 'Add Comment' }}
+      </h2>
+      <label class="block mb-2">
+        <span class="text-gray-700">Title:</span>
+        <input
+          [(ngModel)]="currentComment.title"
+          class="w-full border rounded p-2"
+          required
+        />
+      </label>
+      <label class="block mb-2">
+        <span class="text-gray-700">Content:</span>
+        <textarea
+          [(ngModel)]="currentComment.content"
+          class="w-full border rounded p-2"
+          required
+        ></textarea>
+      </label>
+      <div class="flex justify-end gap-4 mt-4">
+        <button
+          class="p-3 bg-green-500 text-white rounded hover:bg-green-700"
+          (click)="submitComment()"
+        >
+          {{ isEditing ? 'Update' : 'Add' }}
+        </button>
+        <button
+          class="p-3 bg-gray-500 text-white rounded hover:bg-gray-700"
+          (click)="closeCommentModal()"
+        >
+          Cancel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Loading event details...</p>
+</ng-template>
+

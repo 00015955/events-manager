@@ -22,7 +22,6 @@ export class AddEventModalComponent {
     description: '',
     image: '',
     location: '',
-    comments: null,
   };
 
   onSubmit() {

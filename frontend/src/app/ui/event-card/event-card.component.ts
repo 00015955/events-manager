@@ -3,11 +3,12 @@ import {IEvent} from '../../data/interfaces/event.interface';
 import {EventService} from '../../data/services/event.service';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
 
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './event-card.component.html'
 })
 export class EventCardComponent {

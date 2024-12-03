@@ -2,17 +2,21 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IEvent} from '../../data/interfaces/event.interface';
 import {EventService} from '../../data/services/event.service';
 import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
 
 @Component({
   selector: 'app-event-card',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './event-card.component.html'
 })
 export class EventCardComponent {
   @Input() event!: IEvent;
   @Output() eventDeleted = new EventEmitter<number>();
+  @Output() eventUpdated = new EventEmitter<IEvent>();
   showDeleteModal = false;
+  showModal = false;
+  editableEvent!: IEvent;
 
   constructor(private eventService: EventService) {}
 
@@ -22,6 +26,34 @@ export class EventCardComponent {
 
   closeDeleteModal() {
     this.showDeleteModal = false;
+  }
+
+  openEditModal() {
+    this.editableEvent = { ...this.event }; // Create a shallow copy for editing
+    this.showModal = true;
+  }
+
+  closeEditModal() {
+    this.showModal = false;
+  }
+
+  updateEvent() {
+    this.eventService.updateEvent(this.editableEvent.id, this.editableEvent).subscribe({
+      next: () => {
+        this.event.name = this.editableEvent.name;
+        this.event.location = this.editableEvent.location;
+        this.event.description = this.editableEvent.description;
+        this.event.image = this.editableEvent.image;
+
+        this.eventUpdated.emit(this.event);
+
+        console.log('Event updated successfully!', 'Success');
+        this.closeEditModal();
+      },
+      error: (err) => {
+        console.error('Failed to update event:', err);
+      },
+    });
   }
 
   deleteEvent() {
@@ -38,3 +70,6 @@ export class EventCardComponent {
     });
   }
 }
+
+
+

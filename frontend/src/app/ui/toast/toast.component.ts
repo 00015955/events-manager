@@ -28,18 +28,16 @@ import {NgClass} from '@angular/common';
     @keyframes fadeInOut {
       0% {
         opacity: 0;
-        transform: translateY(-20px);
       }
       10% {
         opacity: 1;
         transform: translateY(0);
       }
-      90% {
+      50% {
         opacity: 1;
       }
       100% {
         opacity: 0;
-        transform: translateY(-20px);
       }
     }
   `],

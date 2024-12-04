@@ -1,25 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "/Users/phoenix/Developer/events-manager/backend/backend.csproj": {}
+    "/Users/imac/Developer/wad/events-manager/backend/backend.csproj": {}
   },
   "projects": {
-    "/Users/phoenix/Developer/events-manager/backend/backend.csproj": {
+    "/Users/imac/Developer/wad/events-manager/backend/backend.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/phoenix/Developer/events-manager/backend/backend.csproj",
+        "projectUniqueName": "/Users/imac/Developer/wad/events-manager/backend/backend.csproj",
         "projectName": "backend",
-        "projectPath": "/Users/phoenix/Developer/events-manager/backend/backend.csproj",
-        "packagesPath": "/Users/phoenix/.nuget/packages/",
-        "outputPath": "/Users/phoenix/Developer/events-manager/backend/obj/",
+        "projectPath": "/Users/imac/Developer/wad/events-manager/backend/backend.csproj",
+        "packagesPath": "/Users/imac/.nuget/packages/",
+        "outputPath": "/Users/imac/Developer/wad/events-manager/backend/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/phoenix/.nuget/NuGet/NuGet.Config"
+          "/Users/imac/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "/Users/imac/.nuget/NuGet": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -99,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.404/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.403/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

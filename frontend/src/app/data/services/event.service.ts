@@ -27,27 +27,22 @@ export class EventService {
     return this.http.delete(`${this.baseApiUrl}/event/${id}`)
   }
 
-  // Get all comments
   getAllComments(): Observable<IComment[]> {
     return this.http.get<IComment[]>(`${this.baseApiUrl}/comment`);
   }
 
-  // Get a comment by ID
   getComment(commentId: number): Observable<IComment> {
     return this.http.get<IComment>(`${this.baseApiUrl}/comment/${commentId}`);
   }
 
-  // Create a comment for a specific event
   createComment(eventId: number, comment: IComment): Observable<IComment> {
     return this.http.post<IComment>(`${this.baseApiUrl}/comment/${eventId}`, comment);
   }
 
-  // Update a comment
   updateComment(commentId: number, comment: IComment): Observable<IComment> {
     return this.http.put<IComment>(`${this.baseApiUrl}/comment/${commentId}`, comment);
   }
 
-  // Delete a comment
   deleteComment(commentId: number): Observable<void> {
     return this.http.delete<void>(`${this.baseApiUrl}/comment/${commentId}`);
   }

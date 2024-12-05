@@ -78,9 +78,9 @@ export const environment = {
 };
 ```
 
-###Run the frontend
+### Run the frontend
 ```bash
 ng serve
 ```
-##You're now good to go!
+## You're now good to go!
 

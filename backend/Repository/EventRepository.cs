@@ -72,7 +72,7 @@ public class EventRepository : IEventRepository
     
     if (imageFile != null && imageFile.Length > 0)
     {
-      // Optionally delete the old image
+
       if (!string.IsNullOrEmpty(eventModel.Image))
       {
         DeleteImage(eventModel.Image);
@@ -122,8 +122,7 @@ public class EventRepository : IEventRepository
     {
       await imageFile.CopyToAsync(fileStream);
     }
-
-    // Return the relative path to the image
+    
     return $"/images/{uniqueFileName}";
   }
 

@@ -6,11 +6,6 @@ using backend.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
-if (string.IsNullOrEmpty(builder.Environment.WebRootPath))
-{
-  builder.Environment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
-}
 // Allow all origins, methods, and headers
 builder.Services.AddCors(options =>
 {

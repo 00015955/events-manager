@@ -300,3 +300,4 @@
 /Users/phoenix/Developer/events-manager/backend/obj/Debug/net8.0/backend.genruntimeconfig.cache
 /Users/phoenix/Developer/events-manager/backend/obj/Debug/net8.0/ref/backend.dll
 /Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/backend.staticwebassets.runtime.json
+/Users/imac/Developer/wad/events-manager/backend/bin/Debug/net8.0/Swashbuckle.AspNetCore.Newtonsoft.dll

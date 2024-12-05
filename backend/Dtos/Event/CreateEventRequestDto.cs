@@ -1,5 +1,6 @@
 //Student ID: 00015955
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc;
 
 namespace backend.Dtos.Event;
 
@@ -14,7 +15,9 @@ public class CreateEventRequestDto
   [MinLength(3, ErrorMessage = "Event location must be at least 3 characters long.")]
   [MaxLength(100, ErrorMessage = "Event location must be less than 100 characters long.")]
   public string Location { get; set; } = string.Empty;
-  public IFormFile? Image { get; set; }
+  
+  [FromForm(Name = "ImageFile")]
+  public IFormFile Image { get; set; }
   [Required]
   [MinLength(3, ErrorMessage = "Event description must be at least 3 characters long.")]
   [MaxLength(500, ErrorMessage = "Event description must be less than 500 characters long.")]

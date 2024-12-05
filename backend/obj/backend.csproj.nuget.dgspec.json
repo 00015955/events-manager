@@ -13,6 +13,7 @@
         "packagesPath": "/Users/imac/.nuget/packages/",
         "outputPath": "/Users/imac/Developer/wad/events-manager/backend/obj/",
         "projectStyle": "PackageReference",
+        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/imac/.nuget/NuGet/NuGet.Config"
         ],
@@ -76,9 +77,13 @@
               "target": "Package",
               "version": "[13.0.3, )"
             },
-            "Swashbuckle.AspNetCore": {
+            "Swashbuckle.AspNetCore.Newtonsoft": {
               "target": "Package",
-              "version": "[6.6.2, )"
+              "version": "[7.1.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[7.1.0, )"
             }
           },
           "imports": [

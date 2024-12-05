@@ -2,3 +2,4 @@
 /backend/.env
 /.idea
 /.DS_Store
+/backend/wwwroot/

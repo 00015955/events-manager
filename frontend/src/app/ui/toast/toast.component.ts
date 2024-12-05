@@ -1,3 +1,4 @@
+//Student ID: 00015955
 import { Component, Input } from '@angular/core';
 import {NgClass} from '@angular/common';
 

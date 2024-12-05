@@ -1,9 +1,10 @@
+<!--Student ID: 00015955-->
 @if (event)
 {
   <div class="relative border border-gray-700 flex flex-col rounded-xl">
     <img
-      class="rounded-xl object-cover w-full"
-      src="/event-img.jpeg"
+      class="rounded-xl object-cover w-full max-h-[300px]"
+      [src]="event.image || '/empty-img.png'"
       alt="event-img"
     />
     <div class="flex flex-col gap-3 p-5">
@@ -61,12 +62,17 @@
             <input [(ngModel)]="editableEvent.location" class="w-full bg-gray-800 border p-2 outline-none rounded-md" />
           </label>
           <label>
-            <span class="text-gray-300">Description:</span>
-            <textarea [(ngModel)]="editableEvent.description" class="w-full bg-gray-800 border p-2 outline-none rounded-md"></textarea>
+            <span class="text-gray-300">Image URL:</span>
+            <input
+              type="file"
+              (change)="onFileSelected($event)"
+              accept="image/*"
+              class="w-full bg-gray-800 border p-2 outline-none rounded-md"
+            />
           </label>
           <label>
-            <span class="text-gray-300">Image URL:</span>
-            <input [(ngModel)]="editableEvent.image" class="w-full bg-gray-800 border p-2 outline-none rounded-md" />
+            <span class="text-gray-300">Description:</span>
+            <textarea [(ngModel)]="editableEvent.description" class="w-full bg-gray-800 border p-2 outline-none rounded-md"></textarea>
           </label>
           <div class="flex justify-end gap-4 mt-4">
             <button

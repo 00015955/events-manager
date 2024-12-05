@@ -1,3 +1,4 @@
+//Student ID: 00015955
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {IEvent} from '../interfaces/event.interface';
@@ -17,11 +18,11 @@ export class EventService {
   getEvent(id: number){
     return this.http.get<IEvent>(`${this.baseApiUrl}/event/${id}`)
   }
-  createEvent(event: IEvent){
-    return this.http.post<IEvent>(`${this.baseApiUrl}/event`, event)
+  createEvent(formData: FormData){
+    return this.http.post<IEvent>(`${this.baseApiUrl}/event`, formData)
   }
-  updateEvent(id: number, event: IEvent){
-    return this.http.put(`${this.baseApiUrl}/event/${id}`, event)
+  updateEvent(id: number, formData: FormData): Observable<any> {
+    return this.http.put(`${this.baseApiUrl}/event/${id}`, formData)
   }
   deleteEvent(id: number){
     return this.http.delete(`${this.baseApiUrl}/event/${id}`)

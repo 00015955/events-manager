@@ -12,11 +12,9 @@ namespace backend.Controllers;
 public class EventController : ControllerBase
 {
   private readonly IEventRepository _eventRepo;
-  private readonly IWebHostEnvironment _environment;
-  public EventController( IEventRepository eventRepo,  IWebHostEnvironment environment)
+  public EventController( IEventRepository eventRepo)
   {
     _eventRepo = eventRepo;
-    _environment = environment;
   }
 
   [HttpGet]

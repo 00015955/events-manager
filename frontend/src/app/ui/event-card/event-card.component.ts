@@ -1,3 +1,4 @@
+//Student ID: 00015955
 import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {IEvent} from '../../data/interfaces/event.interface';
 import {EventService} from '../../data/services/event.service';
@@ -5,6 +6,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {RouterModule} from '@angular/router';
 import {ToastService} from '../../data/services/toasts.service';
+import {environment} from '../../../environment';
 
 @Component({
   selector: 'app-event-card',
@@ -18,9 +20,17 @@ export class EventCardComponent {
   @Output() eventUpdated = new EventEmitter<IEvent>();
   showDeleteModal = false;
   showModal = false;
-  editableEvent!: IEvent;
+  editableEvent: IEvent = { ...this.event };
+  selectedFile: File | null = null;
 
   constructor(private eventService: EventService, private toastService: ToastService) {}
+
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedFile = input.files[0];
+    }
+  }
 
   openDeleteModal() {
     this.showDeleteModal = true;
@@ -31,7 +41,7 @@ export class EventCardComponent {
   }
 
   openEditModal() {
-    this.editableEvent = { ...this.event }; // Create a shallow copy for editing
+    this.editableEvent = { ...this.event };
     this.showModal = true;
   }
 
@@ -40,15 +50,21 @@ export class EventCardComponent {
   }
 
   updateEvent() {
-    this.eventService.updateEvent(this.editableEvent.id, this.editableEvent).subscribe({
-      next: () => {
-        this.event.name = this.editableEvent.name;
-        this.event.location = this.editableEvent.location;
-        this.event.description = this.editableEvent.description;
-        this.event.image = this.editableEvent.image;
+    const formData = new FormData();
+    formData.append('Name', this.editableEvent.name);
+    formData.append('Location', this.editableEvent.location);
+    formData.append('Description', this.editableEvent.description);
+    formData.append('StartDate', new Date(this.editableEvent.startDate).toISOString());
 
+    if (this.selectedFile) {
+      formData.append('ImageFile', this.selectedFile);
+    }
+
+    this.eventService.updateEvent(this.editableEvent.id, formData).subscribe({
+      next: (updatedEvent) => {
+        // Update the local event data with the response
+        this.event = { ...updatedEvent };
         this.eventUpdated.emit(this.event);
-
         this.toastService.show('Event updated successfully!', 'success');
         this.closeEditModal();
       },

@@ -1,2 +1,4 @@
 /backend/Migrations/
 /backend/.env
+/.idea
+/.DS_Store

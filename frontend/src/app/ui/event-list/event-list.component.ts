@@ -1,3 +1,4 @@
+//Student ID: 00015955
 import {Component, inject, OnInit} from '@angular/core';
 import {EventService} from '../../data/services/event.service';
 import {IEvent} from '../../data/interfaces/event.interface';
@@ -33,18 +34,10 @@ export class EventListComponent implements OnInit {
     })
   }
 
-  addEvent($event: IEvent) {
-    this.eventService.createEvent($event).subscribe({
-      next: (createdEvent) => {
-        this.events.push(createdEvent);
-        this.toastService.show('Event added successfully!', 'success');
-        this.showAddEventModal = false;
-      },
-      error: (error) => {
-        console.error('Failed to create event:', error);
-        this.toastService.show('Failed to create event!', 'error');
-      }
-    });
+  addEvent(event: IEvent) {
+    this.events.push(event);
+    this.toastService.show('Event added successfully!', 'success');
+    this.showAddEventModal = false;
   }
 
   handleEventDeleted(eventId: number) {

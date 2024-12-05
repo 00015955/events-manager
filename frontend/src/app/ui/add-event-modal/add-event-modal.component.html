@@ -1,5 +1,6 @@
-<div class="modal-overlay">
-  <div class="modal-content bg-gray-700 text-white p-5 rounded-md shadow-md">
+<!--Student ID: 00015955-->
+<div>
+  <div class="bg-gray-700 text-white p-5 rounded-md shadow-md">
     <h2 class="text-xl font-semibold pb-2">Adding Event</h2>
     <form #eventForm="ngForm" (ngSubmit)="onSubmit()">
       <div class="mb-3">
@@ -24,10 +25,10 @@
       <div class="mb-3">
         <label class="block text-gray-300">Event Image</label>
         <input
-          type="text"
+          type="file"
           name="image"
-          [(ngModel)]="newEvent.image"
-          required
+          accept="image/*"
+          (change)="onFileSelected($event)"
           class="w-full border bg-gray-800 p-2 outline-none rounded-md"
         />
       </div>

@@ -1,3 +1,4 @@
+<!--//Student ID: 00015955-->
 <div *ngIf="event; else loading">
   <div class="container mx-auto px-5 lg:px-10 py-5">
     <button
@@ -7,11 +8,11 @@
       Back to Event List
     </button>
     <img
-      class="rounded-xl object-cover w-full pt-10"
-      [src]="event.image || '/event-img.jpeg'"
+      class="w-full object-cover rounded-md max-h-[500px] mt-5 lg:mt-10"
+      [src]="event.image || '/event-img.png'"
       alt="event-img"
     />
-    <div class="">
+    <div class="pt-5">
       <h1 class="font-bold text-3xl mb-2 text-center sm:text-left">{{ event.name }}</h1>
       <h2 class="text-lg text-gray-400 mb-4 text-center sm:text-left">{{ event.startDate | date }}</h2>
       <p class="mb-2 text-center sm:text-left"><strong class="text-orange-500">Location:</strong> {{ event.location }}</p>
@@ -31,7 +32,7 @@
         <div *ngIf="comments.length > 0; else noComments">
           <div *ngFor="let comment of comments" class="p-5 mb-4 rounded-md bg-gray-800">
             <h4 class="font-semibold">{{ comment.title }}</h4>
-            <p class="text-gray-600">{{ comment.content }}</p>
+            <p class="text-gray-300">{{ comment.content }}</p>
             <p class="text-sm text-gray-400">{{ comment.createdOn | date: 'short' }}</p>
             <div class="flex gap-2 mt-2">
               <button

@@ -88,11 +88,12 @@ public class EventRepository : IEventRepository
 
   public async Task<Event?> DeleteAsync(int id)
   {
-    var eventModel = await _context.Events.FirstOrDefaultAsync(x => x.Id == id);
+    var eventModel = await _context.Events.Include(e => e.Comments).FirstOrDefaultAsync(x => x.Id == id);
     if (eventModel == null)
     {
       return null;
     }
+    _context.Comments.RemoveRange(eventModel.Comments);
     _context.Events.Remove(eventModel);
     await _context.SaveChangesAsync();
     return eventModel;
@@ -106,6 +107,11 @@ public class EventRepository : IEventRepository
   // Helper methods for image handling
   private async Task<string> SaveImage(IFormFile imageFile)
   {
+    if (string.IsNullOrEmpty(_environment.WebRootPath))
+    {
+      throw new Exception("WebRootPath is null or empty.");
+    }
+    
     var uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
     Directory.CreateDirectory(uploadsFolder); // Ensure the folder exists
 

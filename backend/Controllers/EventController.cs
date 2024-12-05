@@ -22,7 +22,7 @@ public class EventController : ControllerBase
   {
     if (!ModelState.IsValid) return BadRequest(ModelState); //Data Validation
     var events = await _eventRepo.GetAllAsync(query);
-    var eventDto = events.Select(e => e.ToEventDto());
+    var eventDto = events.Select(e => e.ToEventDto(Request));
     return Ok(eventDto);
   }
 
@@ -36,21 +36,21 @@ public class EventController : ControllerBase
     {
       return NotFound();
     }
-    return Ok(events.ToEventDto());
+    return Ok(events.ToEventDto(Request));
   }
 
   [HttpPost]
-  public async Task<IActionResult> CreateEvent([FromBody] CreateEventRequestDto eventDto)
+  public async Task<IActionResult> CreateEvent([FromForm] CreateEventRequestDto eventDto)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = eventDto.ToEventFromCreateDTO();
     await _eventRepo.CreateAsync(eventModel, eventDto.Image);
-    return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto());
+    return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto(Request));
   }
 
   [HttpPut]
   [Route("{id:int}")]
-  public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventRequestDto updateDto)
+  public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromForm] UpdateEventRequestDto updateDto)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = await _eventRepo.UpdateAsync(id, updateDto, updateDto.Image);
@@ -58,7 +58,7 @@ public class EventController : ControllerBase
     {
       return NotFound();
     }
-    return Ok(eventModel.ToEventDto());
+    return Ok(eventModel.ToEventDto(Request));
   }
 
   [HttpDelete]

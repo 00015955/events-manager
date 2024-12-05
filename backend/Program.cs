@@ -6,6 +6,11 @@ using backend.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
+
+if (string.IsNullOrEmpty(builder.Environment.WebRootPath))
+{
+  builder.Environment.WebRootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+}
 // Allow all origins, methods, and headers
 builder.Services.AddCors(options =>
 {
@@ -31,19 +36,6 @@ var defaultConnectionString = builder.Configuration.GetConnectionString("Default
 /*var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!
   .Replace("{PCNAME}", Env.GetString("PCNAME"))
   .Replace("{DATABASENAME}", Env.GetString("DATABASENAME"));*/
-
-// Configuring Request Size Limits (for Image Uploading)
-const long maxRequestBodySize = 10 * 1024 * 1024; // 10 MB
-
-builder.Services.Configure<IISServerOptions>(options =>
-{
-  options.MaxRequestBodySize = maxRequestBodySize;
-});
-
-builder.WebHost.ConfigureKestrel(serverOptions =>
-{
-  serverOptions.Limits.MaxRequestBodySize = maxRequestBodySize;
-});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

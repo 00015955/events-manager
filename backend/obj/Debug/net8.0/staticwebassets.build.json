@@ -1,11 +1,39 @@
 {
   "Version": 1,
-  "Hash": "7/yvsnDRTixX0vVer35KSjS1HzfM4rGxA/gc1emwSdw=",
+  "Hash": "dk4U8R29elllr6Kn7k2T+/5dAWBCtaGtT42WvP2U3eE=",
   "Source": "backend",
   "BasePath": "_content/backend",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "backend/wwwroot",
+      "Source": "backend",
+      "ContentRoot": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/ba8cace7-1b2c-466e-a46f-e21d913680af.jpg",
+      "SourceId": "backend",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/",
+      "BasePath": "_content/backend",
+      "RelativePath": "images/ba8cace7-1b2c-466e-a46f-e21d913680af.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/ba8cace7-1b2c-466e-a46f-e21d913680af.jpg"
+    }
+  ]
 }

@@ -6,8 +6,9 @@ namespace backend.Mappers;
 
 public static class EventMappers
 {
-  public static EventDto ToEventDto(this Event eventModel)
+  public static EventDto ToEventDto(this Event eventModel, HttpRequest request)
   {
+    var baseUrl = $"{request.Scheme}://{request.Host}";
     return new EventDto
     {
       Id = eventModel.Id,
@@ -15,7 +16,7 @@ public static class EventMappers
       Location = eventModel.Location,
       Description = eventModel.Description,
       StartDate = eventModel.StartDate,
-      Image = eventModel.Image,
+      Image = string.IsNullOrEmpty(eventModel.Image) ? null : $"{baseUrl}{eventModel.Image}",
       Comments = eventModel.Comments.Select(c => c.ToCommentDto()).ToList()
     };
   }
@@ -26,6 +27,7 @@ public static class EventMappers
     {
       Name = eventRequestDto.Name,
       Location = eventRequestDto.Location,
+      Description = eventRequestDto.Description,
       StartDate = DateTime.Now
     };
   }

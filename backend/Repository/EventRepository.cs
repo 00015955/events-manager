@@ -1,3 +1,4 @@
+//Student ID: 00015955
 using backend.Data;
 using backend.Dtos.Event;
 using backend.Helpers;
@@ -10,9 +11,11 @@ namespace backend.Repository;
 public class EventRepository : IEventRepository
 {
   private readonly ApplicationDBContext _context;
-  public EventRepository(ApplicationDBContext context)
+  private readonly IWebHostEnvironment _environment;
+  public EventRepository(ApplicationDBContext context, IWebHostEnvironment environment)
   {
     _context = context;
+    _environment = environment;
   }
   public async Task<List<Event>> GetAllAsync(QueryObject query)
   {
@@ -43,14 +46,20 @@ public class EventRepository : IEventRepository
     return await _context.Events.Include(c => c.Comments).FirstOrDefaultAsync(i => i.Id == id);
   }
 
-  public async Task<Event> CreateAsync(Event eventModel)
+  public async Task<Event> CreateAsync(Event eventModel, IFormFile? imageFile)
   {
+    if (imageFile != null && imageFile.Length > 0)
+    {
+      string imagePath = await SaveImage(imageFile);
+      eventModel.Image = imagePath;
+    }
+    
     await _context.Events.AddAsync(eventModel);
     await _context.SaveChangesAsync();
     return eventModel;
   }
   
-  public async Task<Event?> UpdateAsync(int id, UpdateEventRequestDto updateEventDto)
+  public async Task<Event?> UpdateAsync(int id, UpdateEventRequestDto updateEventDto, IFormFile? imageFile)
   {
     var eventModel = await _context.Events.FirstOrDefaultAsync(x => x.Id == id);
     if (eventModel == null)
@@ -59,8 +68,19 @@ public class EventRepository : IEventRepository
     }
     eventModel.Name = updateEventDto.Name;
     eventModel.Location = updateEventDto.Location;
-    eventModel.Image = updateEventDto.Image;
     eventModel.Description = updateEventDto.Description;
+    
+    if (imageFile != null && imageFile.Length > 0)
+    {
+      // Optionally delete the old image
+      if (!string.IsNullOrEmpty(eventModel.Image))
+      {
+        DeleteImage(eventModel.Image);
+      }
+
+      string imagePath = await SaveImage(imageFile);
+      eventModel.Image = imagePath;
+    }
 
     await _context.SaveChangesAsync();
     return eventModel;
@@ -81,5 +101,32 @@ public class EventRepository : IEventRepository
   public Task<bool> EventExists(int id)
   {
     return _context.Events.AnyAsync(e => e.Id == id);
+  }
+  
+  // Helper methods for image handling
+  private async Task<string> SaveImage(IFormFile imageFile)
+  {
+    var uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
+    Directory.CreateDirectory(uploadsFolder); // Ensure the folder exists
+
+    var uniqueFileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
+    var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+    using (var fileStream = new FileStream(filePath, FileMode.Create))
+    {
+      await imageFile.CopyToAsync(fileStream);
+    }
+
+    // Return the relative path to the image
+    return $"/images/{uniqueFileName}";
+  }
+
+  private void DeleteImage(string imagePath)
+  {
+    var fullPath = Path.Combine(_environment.WebRootPath, imagePath.TrimStart('/'));
+    if (File.Exists(fullPath))
+    {
+      File.Delete(fullPath);
+    }
   }
 }

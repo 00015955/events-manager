@@ -32,8 +32,19 @@ var defaultConnectionString = builder.Configuration.GetConnectionString("Default
   .Replace("{PCNAME}", Env.GetString("PCNAME"))
   .Replace("{DATABASENAME}", Env.GetString("DATABASENAME"));*/
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Configuring Request Size Limits (for Image Uploading)
+const long maxRequestBodySize = 10 * 1024 * 1024; // 10 MB
+
+builder.Services.Configure<IISServerOptions>(options =>
+{
+  options.MaxRequestBodySize = maxRequestBodySize;
+});
+
+builder.WebHost.ConfigureKestrel(serverOptions =>
+{
+  serverOptions.Limits.MaxRequestBodySize = maxRequestBodySize;
+});
+
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -60,6 +71,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseCors("AllowAll");
 app.MapControllers();
 

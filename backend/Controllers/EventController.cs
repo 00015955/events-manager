@@ -44,7 +44,7 @@ public class EventController : ControllerBase
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = eventDto.ToEventFromCreateDTO();
-    await _eventRepo.CreateAsync(eventModel);
+    await _eventRepo.CreateAsync(eventModel, eventDto.Image);
     return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto());
   }
 
@@ -53,7 +53,7 @@ public class EventController : ControllerBase
   public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromBody] UpdateEventRequestDto updateDto)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
-    var eventModel = await _eventRepo.UpdateAsync(id, updateDto);
+    var eventModel = await _eventRepo.UpdateAsync(id, updateDto, updateDto.Image);
     if (eventModel == null)
     {
       return NotFound();

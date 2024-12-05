@@ -21,16 +21,16 @@ builder.Services.AddCors(options =>
 Env.Load();
 
 //Mac or Linux
-var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!
+/* var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!
   .Replace("{DB_HOST}", Env.GetString("DB_HOST"))
   .Replace("{DB_NAME}", Env.GetString("DB_NAME"))
   .Replace("{DB_USER}", Env.GetString("DB_USER"))
-  .Replace("{DB_PASS}", Env.GetString("DB_PASS"));
+  .Replace("{DB_PASS}", Env.GetString("DB_PASS")); */
 
 //Windows
-/*var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!
+var defaultConnectionString = builder.Configuration.GetConnectionString("DefaultConnection")!
   .Replace("{PCNAME}", Env.GetString("PCNAME"))
-  .Replace("{DATABASENAME}", Env.GetString("DATABASENAME"));*/
+  .Replace("{DATABASENAME}", Env.GetString("DATABASENAME"));
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

@@ -4,13 +4,14 @@ import {HttpClient} from '@angular/common/http';
 import {IEvent} from '../interfaces/event.interface';
 import {IComment} from '../interfaces/comment.interface';
 import {Observable} from 'rxjs';
+import {environment} from '../../../environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
   http: HttpClient = inject(HttpClient);
-  baseApiUrl = 'http://localhost:5182/api';
+  private baseApiUrl = `${environment.apiBaseUrl}/api`;
 
   getAllEvents(){
     return this.http.get<IEvent[]>(`${this.baseApiUrl}/event`)

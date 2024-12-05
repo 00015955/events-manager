@@ -1,8 +1,12 @@
 {
   "Files": [
     {
-      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/fee199b4-4d52-4a04-8111-e493e7baa00a.jpg",
-      "PackagePath": "staticwebassets/images/fee199b4-4d52-4a04-8111-e493e7baa00a.jpg"
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/b733e27c-503a-47f7-952f-a379d2b17c53.JPG",
+      "PackagePath": "staticwebassets/images/b733e27c-503a-47f7-952f-a379d2b17c53.JPG"
+    },
+    {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/da6b4caa-f1c8-46c6-b1d6-27eb354461ef.jpg",
+      "PackagePath": "staticwebassets/images/da6b4caa-f1c8-46c6-b1d6-27eb354461ef.jpg"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.backend.Microsoft.AspNetCore.StaticWebAssets.props",

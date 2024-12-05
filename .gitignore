@@ -2,3 +2,4 @@
 /backend/.env
 /.idea
 /.DS_Store
+/frontend/src/environment.ts

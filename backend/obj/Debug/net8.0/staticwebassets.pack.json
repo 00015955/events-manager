@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets/images/48a77891-f86f-4cd3-b95e-75b3d7598302.jpg"
     },
     {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/5780edcb-6349-4193-89b4-43f85f03e3bd.JPG",
+      "PackagePath": "staticwebassets/images/5780edcb-6349-4193-89b4-43f85f03e3bd.JPG"
+    },
+    {
       "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/5bce9126-0652-4c01-b5f5-0c0c5403e1af.jpg",
       "PackagePath": "staticwebassets/images/5bce9126-0652-4c01-b5f5-0c0c5403e1af.jpg"
+    },
+    {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/663871da-0ba9-4e26-881f-5ad30842210b.jpg",
+      "PackagePath": "staticwebassets/images/663871da-0ba9-4e26-881f-5ad30842210b.jpg"
     },
     {
       "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/670bc99b-96a5-4a43-a4ee-dfae7afaa8f0.JPG",
@@ -25,6 +33,14 @@
       "PackagePath": "staticwebassets/images/77fb82e1-d1af-4f98-a9b5-d9d892f14147.jpg"
     },
     {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/847067fa-9448-404a-8f4b-163cec25a02b.jpeg",
+      "PackagePath": "staticwebassets/images/847067fa-9448-404a-8f4b-163cec25a02b.jpeg"
+    },
+    {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/9404f7db-9c8f-4d9f-94bd-8e290e72e08b.jpg",
+      "PackagePath": "staticwebassets/images/9404f7db-9c8f-4d9f-94bd-8e290e72e08b.jpg"
+    },
+    {
       "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/aa041036-d634-48dd-bb68-f14d070bb699.jpg",
       "PackagePath": "staticwebassets/images/aa041036-d634-48dd-bb68-f14d070bb699.jpg"
     },
@@ -35,6 +51,14 @@
     {
       "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/c2eee2c3-db66-4f0a-88ec-a4d1b7b9524e.jpg",
       "PackagePath": "staticwebassets/images/c2eee2c3-db66-4f0a-88ec-a4d1b7b9524e.jpg"
+    },
+    {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/ca6c042a-95cd-4c9a-a9b7-71dc6dbf7299.jpg",
+      "PackagePath": "staticwebassets/images/ca6c042a-95cd-4c9a-a9b7-71dc6dbf7299.jpg"
+    },
+    {
+      "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/d1e6c7e2-4712-4b47-8601-26e16b24c2b4.jpg",
+      "PackagePath": "staticwebassets/images/d1e6c7e2-4712-4b47-8601-26e16b24c2b4.jpg"
     },
     {
       "Id": "/Users/imac/Developer/wad/events-manager/backend/wwwroot/images/d368559c-3626-4525-b27e-534c46d8b705.jpg",

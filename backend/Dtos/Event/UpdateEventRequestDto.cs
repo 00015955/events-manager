@@ -15,8 +15,6 @@ public class UpdateEventRequestDto
   [MinLength(3, ErrorMessage = "Event location must be at least 3 characters long.")]
   [MaxLength(100, ErrorMessage = "Event location must be less than 100 characters long.")]
   
-  [FromForm(Name = "ImageFile")]
-  public IFormFile Image { get; set; }
   public string Location { get; set; } = string.Empty;
   [Required]
   [MinLength(3, ErrorMessage = "Event description must be at least 3 characters long.")]

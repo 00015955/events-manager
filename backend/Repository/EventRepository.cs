@@ -5,6 +5,7 @@ using backend.Helpers;
 using backend.Interfaces;
 using backend.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 
 namespace backend.Repository;
 
@@ -72,7 +73,6 @@ public class EventRepository : IEventRepository
     
     if (imageFile != null && imageFile.Length > 0)
     {
-
       if (!string.IsNullOrEmpty(eventModel.Image))
       {
         DeleteImage(eventModel.Image);
@@ -107,13 +107,8 @@ public class EventRepository : IEventRepository
   // Helper methods for image handling
   private async Task<string> SaveImage(IFormFile imageFile)
   {
-    if (string.IsNullOrEmpty(_environment.WebRootPath))
-    {
-      throw new Exception("WebRootPath is null or empty.");
-    }
-    
     var uploadsFolder = Path.Combine(_environment.WebRootPath, "images");
-    Directory.CreateDirectory(uploadsFolder); // Ensure the folder exists
+    Directory.CreateDirectory(uploadsFolder);
 
     var uniqueFileName = Guid.NewGuid() + Path.GetExtension(imageFile.FileName);
     var filePath = Path.Combine(uploadsFolder, uniqueFileName);
@@ -122,11 +117,11 @@ public class EventRepository : IEventRepository
     {
       await imageFile.CopyToAsync(fileStream);
     }
-    
+
     return $"/images/{uniqueFileName}";
   }
 
-  private void DeleteImage(string imagePath)
+  public void DeleteImage(string imagePath)
   {
     var fullPath = Path.Combine(_environment.WebRootPath, imagePath.TrimStart('/'));
     if (File.Exists(fullPath))

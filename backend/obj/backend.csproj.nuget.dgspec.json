@@ -13,7 +13,6 @@
         "packagesPath": "/Users/imac/.nuget/packages/",
         "outputPath": "/Users/imac/Developer/wad/events-manager/backend/obj/",
         "projectStyle": "PackageReference",
-        "UsingMicrosoftNETSdk": false,
         "configFilePaths": [
           "/Users/imac/.nuget/NuGet/NuGet.Config"
         ],

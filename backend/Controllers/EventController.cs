@@ -12,9 +12,11 @@ namespace backend.Controllers;
 public class EventController : ControllerBase
 {
   private readonly IEventRepository _eventRepo;
-  public EventController( IEventRepository eventRepo)
+  private readonly IWebHostEnvironment _environment;
+  public EventController( IEventRepository eventRepo,  IWebHostEnvironment environment)
   {
     _eventRepo = eventRepo;
+    _environment = environment;
   }
 
   [HttpGet]
@@ -40,20 +42,32 @@ public class EventController : ControllerBase
   }
 
   [HttpPost]
-  public async Task<IActionResult> CreateEvent([FromForm] CreateEventRequestDto eventDto)
+  public async Task<IActionResult> CreateEvent([FromForm] CreateEventRequestDto eventDto, IFormFile imageFile)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
     var eventModel = eventDto.ToEventFromCreateDTO();
-    await _eventRepo.CreateAsync(eventModel, eventDto.Image);
+    await _eventRepo.CreateAsync(eventModel, imageFile);
     return CreatedAtAction(nameof(GetEventById), new { id = eventModel.Id }, eventModel.ToEventDto(Request));
   }
 
   [HttpPut]
   [Route("{id:int}")]
-  public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromForm] UpdateEventRequestDto updateDto)
+  public async Task<IActionResult> UpdateEvent([FromRoute] int id, [FromForm] UpdateEventRequestDto updateDto, IFormFile imageFile)
   {
     if (!ModelState.IsValid) return BadRequest(ModelState);
-    var eventModel = await _eventRepo.UpdateAsync(id, updateDto, updateDto.Image);
+    if (imageFile.Length == 0)
+    {
+      ModelState.AddModelError("ImageFile", "The uploaded file is empty.");
+      return BadRequest(ModelState);
+    }
+    if (!imageFile.ContentType.StartsWith("image/"))
+    {
+      ModelState.AddModelError("ImageFile", "The uploaded file is not an image.");
+      return BadRequest(ModelState);
+    }
+    
+      
+    var eventModel = await _eventRepo.UpdateAsync(id, updateDto, imageFile);
     if (eventModel == null)
     {
       return NotFound();
